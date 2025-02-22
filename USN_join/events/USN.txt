@@ -1,0 +1,119 @@
+country_event = { 
+  id = USN.2
+  title = USN.2.t
+  desc = USN.2.d
+  picture = GFX_pacific_fleet
+  major = yes
+  trigger = {
+	date > 2024.1.1
+  }
+
+  # 先处理USN的傀儡和海军转移
+  immediate = {}
+  # 让PRC收到这个事件
+  trigger = {
+    tag = PRC
+  }
+
+  option = { # PRC的选项
+    name = USN.2.a
+	if = {
+		limit = { country_exists = USN }
+		JAP = {
+		  puppet = USN               # USN成为JAP的傀儡
+		}
+		USN =     {    				# USN全部舰队、将领转移给JAP
+			transfer_navy = {
+			  target = JAP
+		    }
+			every_unit_leader = {			
+				set_nationality = JAP
+			}
+		}
+	}
+  }
+}
+
+#Hawaii Battle Report
+country_event = {
+	id = china.494
+	title = china.494.t
+	desc = china.494.d
+	picture = GFX_SOV_secret_documents
+	fire_only_once = yes  # 防止重复触发
+	is_triggered_only= yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = china.495
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = china.494.a
+			PRC = {
+				annex_country = {
+					target = USN
+				}
+			}
+	}
+}
+#PRC lands in Hawaii
+news_event = {
+	id = news.556
+	title = news.556.t
+	desc = news.556.d
+	picture = GFX_Chinese_Invade_Okinawa
+	fire_only_once = yes  # 防止重复触发
+	is_triggered_only= yes
+
+	major = yes
+	trigger = {
+		PRC = {
+			has_war_with = USN
+		}
+	}
+	option = {
+		name = news.556.a
+	}
+}
+
+# Hawaii negotiate
+country_event = {
+	id = china.495
+	title = china.495.t
+	desc = china.495.d
+	fire_only_once = yes  # 防止重复触发
+	is_triggered_only= yes
+
+	immediate = {}
+	option = {			# 拒绝，和美团爆了（适合想继续打的）
+		name = china.495.a
+			USA = {
+				declare_war_on = {
+					target = PRC
+					type = take_core_state
+				}
+			}
+	}
+	option = {			# 同意，归还阿拉斯加和波多黎各，获得一些加成
+		name = china.495.b
+			USA = {
+				transfer_state = 463
+				transfer_state = 686
+				set_temp_variable = {
+					var = debt_var_temp
+					value = 1000
+				}
+				add_debt_with_inflation = no
+			}
+			PRC = {
+				set_temp_variable = {
+					income_var_temp = 1000
+				}
+				add_income_with_inflation = no
+			}
+	}
+}

@@ -1,0 +1,40 @@
+on_actions = {
+	on_state_control_changed = {
+		effect = {
+			if = {
+				#PRC Invades Hawaii
+				limit = {
+					FROM.FROM = {
+						state = 629
+					}
+					OR = {
+						FROM = {
+							tag = USN
+						}
+						FROM = {
+							tag = PRC
+						}
+					}
+					OR = {
+						ROOT = {
+							tag = USN
+						}
+						ROOT = {
+							tag = PRC
+						}
+					}
+					not = {
+						has_global_flag = battle_of_hawaii
+					}
+				}
+				set_global_flag = battle_of_hawaii
+				news_event = {
+					id = news.556
+				}
+				PRC = {
+					country_event = china.494
+				}
+			}
+		}
+	}
+}

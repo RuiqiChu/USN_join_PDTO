@@ -1,0 +1,15 @@
+spriteTypes = {
+	
+	spriteType = {
+		name = "GFX_pacific_fleet"
+		texturefile = "gfx/event_pictures/pacific_fleet.png"
+	}
+	spriteType = {
+		name = "GFX_SOV_secret_documents"
+		texturefile = "gfx/event_pictures/SOV_secret_documents.png"
+	}
+	spriteType = {
+		name = "GFX_Chinese_Invade_Okinawa"
+		texturefile = "gfx/event_pictures/Chinese Invade Okinawa.dds"
+	}
+}
